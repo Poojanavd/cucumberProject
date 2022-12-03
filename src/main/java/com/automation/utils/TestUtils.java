@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,7 +42,7 @@ public class TestUtils {
 
 	public List<String> retriveStaticDropdownValues(WebElement ele) {
 		Select select = new Select(ele);
-		return select.getOptions().stream().map(options -> options.getText()).toList();
+		return select.getOptions().stream().map(options -> options.getText()).collect(Collectors.toList());
 	}
 
 	public void selectElementByValue(WebElement ele, String textToSelect) {
