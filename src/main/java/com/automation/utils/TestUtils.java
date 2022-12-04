@@ -81,4 +81,8 @@ public class TestUtils {
 		}
 		return code;
 	}
+	
+	public void sendText(WebElement ele,String textToEnter) {
+		ele.sendKeys(textToEnter);
+	}
 }
