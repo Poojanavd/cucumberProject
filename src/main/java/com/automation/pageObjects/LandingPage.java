@@ -23,6 +23,18 @@ public class LandingPage extends TestUtils {
 	@FindBy(css = ".product-image img")
 	private List<WebElement> productImg;
 
+	@FindBy(xpath = "//input[@placeholder='Search for Vegetables and Fruits']")
+	private WebElement searchBar;
+
+	@FindBy(xpath = "//button[@type='submit']")
+	private WebElement submitBtn;
+	
+	@FindBy(css = ".products")
+	private WebElement produtsList;
+	
+	@FindBy(css = ".product h4")
+	private WebElement productTitle;
+
 	public LandingPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -48,6 +60,18 @@ public class LandingPage extends TestUtils {
 			}
 			Assert.fail();
 		}
+	}
+
+	public void enterProductInSearchBar(String product) {
+		sendText(searchBar, product);
+		clickElement(submitBtn);
+	}
+
+	public String retriveProductNameWhenSearched() throws InterruptedException {
+		Thread.sleep(2000);
+		waitTillElementIsVisible(produtsList,5);
+		String[] productName = getTextOfWebElement(productTitle).split("-");
+		return productName[0].trim();
 	}
 
 }

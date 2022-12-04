@@ -2,15 +2,20 @@ package com.automation.utils;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.hc.core5.http.impl.nio.ExpandableBuffer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TestUtils {
 
@@ -84,5 +89,14 @@ public class TestUtils {
 	
 	public void sendText(WebElement ele,String textToEnter) {
 		ele.sendKeys(textToEnter);
+	}
+	
+	public void waitTillElementIsVisible(WebElement ele,int timeInSeconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+		wait.until(ExpectedConditions.visibilityOf(ele));
+	}
+	
+	public String getTextOfWebElement(WebElement ele) {
+		return ele.getText();
 	}
 }
